@@ -2,5 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { createStore, Provider } from 'redux';
+import todoApp from './reducers';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(todoApp);
+
+ReactDOM.render(
+    <Provider>
+    <App store={store}/>
+    </Provider>
+    , document.getElementById('root'));
