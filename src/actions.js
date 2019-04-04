@@ -2,15 +2,17 @@ export const ADD = 'ADD';
 export const TOGGLE = 'TOGGLE' ;
 export const SET_FILTER = 'SET_FILTER';
 export const Filters = {ALL : 'ALL', COMPLETED: 'COMPLETED', ACTIVE: 'ACTIVE'};
+let Id = 0;
 
-export function addTodo(text){
-    return {type: ADD, text}
-}
 
-export function toggleTodo(index) {
-    return { type: TOGGLE, index }
-  }
+export const addTodo = text =>
+    ({type: ADD, index: Id++, text})
+
+
+export const toggleTodo = index =>
+    ({ type: TOGGLE, index })
   
-  export function setFilter(filter) {
-    return { type: SET_FILTER, filter }
-  }
+  
+  export const setFilter = filter =>
+    ({ type: SET_FILTER, filter })
+  
