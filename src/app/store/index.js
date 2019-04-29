@@ -18,7 +18,19 @@ export const store = createStore(
                         group: action.groupID,
                         owner: action.ownerID,
                         isComplete: false
-                    }]
+                    }];
+                case mutations.SET_TASK_COMPLETE:
+                    return tasks.map(i => {
+                        return (i.id===action.taskID ? ({...i,isComplete:action.isComplete}): i)
+                    });
+                case mutations.SET_TASK_NAME:
+                    return tasks.map(i => {
+                        return (i.id===action.taskID ? ({...i,name:action.name}): i)
+                    });
+                case mutations.SET_TASK_GROUP:
+                    return tasks.map(i => {
+                        return (i.id===action.taskID ? ({...i,group:action.groupID}): i)
+                    });
             }
             return tasks;
         },
