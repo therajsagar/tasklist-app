@@ -1,6 +1,14 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { defaultState } from '../../server/defaultState';
-import { createLogger } from 'redux-logger';
+import {
+    createStore,
+    applyMiddleware,
+    combineReducers
+} from 'redux';
+import {
+    defaultState
+} from '../../server/defaultState';
+import {
+    createLogger
+} from 'redux-logger';
 import createSagaMiddleware from 'redux-saga'
 import * as sagas from './sagas';
 import * as mutations from './mutation';
@@ -9,10 +17,10 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = createStore(
     combineReducers({
-        tasks(tasks = defaultState.tasks, action){
-            switch(action.type){
+        tasks(tasks = defaultState.tasks, action) {
+            switch (action.type) {
                 case mutations.CREATE_TASK:
-                    return [...tasks,{
+                    return [...tasks, {
                         id: action.taskID,
                         name: "New Task",
                         group: action.groupID,
@@ -21,32 +29,41 @@ export const store = createStore(
                     }];
                 case mutations.SET_TASK_COMPLETE:
                     return tasks.map(i => {
-                        return (i.id===action.taskID ? ({...i,isComplete:action.isComplete}): i)
+                        return (i.id === action.taskID ? ({
+                            ...i,
+                            isComplete: action.isComplete
+                        }) : i)
                     });
                 case mutations.SET_TASK_NAME:
                     return tasks.map(i => {
-                        return (i.id===action.taskID ? ({...i,name:action.name}): i)
+                        return (i.id === action.taskID ? ({
+                            ...i,
+                            name: action.name
+                        }) : i)
                     });
                 case mutations.SET_TASK_GROUP:
                     return tasks.map(i => {
-                        return (i.id===action.taskID ? ({...i,group:action.groupID}): i)
+                        return (i.id === action.taskID ? ({
+                            ...i,
+                            group: action.groupID
+                        }) : i)
                     });
             }
             return tasks;
         },
-        comments(comments = defaultState.comments, action){
+        comments(comments = defaultState.comments, action) {
             return comments;
         },
-        groups(groups=defaultState.groups, action){
+        groups(groups = defaultState.groups, action) {
             return groups;
         },
-        users(users=defaultState.users, action){
+        users(users = defaultState.users, action) {
             return users;
         }
     }),
     applyMiddleware(createLogger(), sagaMiddleware)
 );
 
-for(let i in sagas) {
+for (let i in sagas) {
     sagaMiddleware.run(sagas[i]);
 }
