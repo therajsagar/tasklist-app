@@ -30,7 +30,7 @@ export const setTaskGroup = (id, groupID) =>({
 });
 
 export const setTaskName = (id, name) =>({
-    type: SET_TASK_COMPLETE,
+    type: SET_TASK_NAME,
     taskID: id,
     name 
 });
