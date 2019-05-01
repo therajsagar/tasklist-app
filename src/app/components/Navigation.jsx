@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 
 const Navigation = () => (
-  <div>
+  <div className='header'>
     <Link to='/'>My App</Link>
   </div>
 );
