@@ -8,13 +8,12 @@ import { ConnectedTaskDetail } from './TaskDetail';
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 import { history } from '../store/history';
 
-const RouteGuard = Component => ({ match }) => {
-  !store.getState().session.authenicated ? (
+const RouteGuard = Component => ({ match }) =>
+  !store.getState().session.authenticated ? (
     <Redirect to='/' />
   ) : (
     <Component match={match} />
   );
-};
 
 export const Main = () => (
   <Router history={history}>
