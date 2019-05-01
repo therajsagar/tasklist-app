@@ -7,9 +7,14 @@ import {
 
 async function initializeDB() {
     let db = await connectDB();
-    for (let i in defaultState) {
-        let collection = db.collection(i);
-        await collection.insertMany(defaultState[i]);
+    let user = await db.collection(`users`).findOne({
+        id: "U1"
+    });
+    if (!user) {
+        for (let i in defaultState) {
+            let collection = db.collection(i);
+            await collection.insertMany(defaultState[i]);
+        }
     }
 }
 

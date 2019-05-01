@@ -6,15 +6,11 @@ export const Dashboard = ({ groups }) => (
   <div>
     <h1>Dashboard</h1>
     {groups.map(i => (
-      <ConnectedTaskList key={i.id} id={i.id} name={i.name} />
+      <ConnectedTaskList key={i.id} {...i} />
     ))}
   </div>
 );
 
-function mapStateToProps(state) {
-  return {
-    groups: state.groups
-  };
-}
+const mapStateToProps = ({ groups }) => ({ groups });
 
 export const ConnectedDashboard = connect(mapStateToProps)(Dashboard);
